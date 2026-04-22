@@ -1,0 +1,50 @@
+/* ==========================================
+   ENTERPRISE ADMIN PANEL DESIGN SYSTEM
+   Theme inspired by India (White, Red, Saffron, Green)
+   ========================================== */
+:root {
+  --admin-primary: #DC2626; /* Deep Red */
+  --admin-saffron: #FF9933; /* Saffron */
+  --admin-green: #138808;  /* India Green */
+  --admin-bg: #F3F4F6;
+  --admin-surface: #FFFFFF;
+  --admin-text: #111827;
+  --admin-text-light: #6B7280;
+  --admin-border: #E5E7EB;
+  
+  --sidebar-bg: #111827;
+  --sidebar-text: #D1D5DB;
+  --sidebar-active: #DC2626;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05);
+
+  --font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); background-color: var(--admin-bg); color: var(--admin-text); }
+h1, h2, h3, h4 { font-weight: 700; }
+a { text-decoration: none; color: inherit; }
+
+/* Admin Layout Utilities */
+.admin-layout { display: flex; height: 100vh; overflow: hidden; }
+.admin-sidebar { width: 260px; background: var(--sidebar-bg); color: var(--sidebar-text); display: flex; flexDirection: column; }
+.admin-main { flex: 1; display: flex; flexDirection: column; overflow: hidden; }
+.admin-header { height: 70px; background: var(--admin-surface); border-bottom: 1px solid var(--admin-border); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+.admin-content { flex: 1; overflow-y: auto; padding: 2rem; }
+
+/* Generic UI */
+.card { background: var(--admin-surface); border-radius: 12px; padding: 1.5rem; box-shadow: var(--shadow-card); border: 1px solid var(--admin-border); }
+.metric-value { font-size: 2rem; font-weight: 700; color: var(--admin-text); }
+
+.status-badge { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.status-active { background: #DCFCE7; color: var(--admin-green); }
+.status-pending { background: #FEF3C7; color: var(--admin-saffron); }
+.status-banned { background: #FEE2E2; color: var(--admin-primary); }
+
+.table-container { width: 100%; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { padding: 1rem; border-bottom: 2px solid var(--admin-border); color: var(--admin-text-light); font-weight: 600; font-size: 0.85rem; }
+td { padding: 1rem; border-bottom: 1px solid var(--admin-border); font-size: 0.95rem; }
+tr:hover { background: #F9FAFB; }
