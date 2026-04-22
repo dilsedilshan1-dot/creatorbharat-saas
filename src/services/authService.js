@@ -21,6 +21,23 @@ export const AuthService = {
             throw error;
         }
     },
+    register: async (userData) => {
+        try {
+            const response = await fetch(`${BASE_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            const data = await response.json();
+            
+            if (!response.ok) throw new Error(data.message || 'Registration failed');
+            
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    },
     logout: () => {
         sessionStorage.removeItem(SESSION_KEY);
     },

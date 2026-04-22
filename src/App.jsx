@@ -7,6 +7,7 @@ import Campaigns from './pages/Campaigns';
 import Dashboard from './pages/Dashboard';
 import CreatorProfile from './pages/CreatorProfile';
 import Apply from './pages/Apply';
+import { ProtectedRoute } from './components/shared/ProtectedRoute';
 import { Analytics } from '@vercel/analytics/react';
 
 const App = () => {
@@ -16,11 +17,13 @@ const App = () => {
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/apply" element={<Apply />} />
           <Route path="/creators" element={<Creators />} />
           <Route path="/creator/:id" element={<CreatorProfile />} />
           <Route path="/campaigns" element={<Campaigns />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          
+          {/* Protected SaaS Routes */}
+          <Route path="/apply" element={<Apply />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>
       </main>
       <footer style={{ padding: '4rem 0', background: 'white', borderTop: '1px solid var(--border-color)', marginTop: 'auto' }}>

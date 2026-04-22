@@ -43,13 +43,25 @@ export const AppProvider = ({ children }) => {
       }
   };
 
+  const registerUser = async (userData) => {
+      try {
+          const user = await AuthService.register(userData);
+          dispatch({ type: 'SET_USER', payload: user });
+          addToast(`Account created successfully!`, 'success');
+          return user;
+      } catch (error) {
+          addToast(error.message, 'error');
+          throw error;
+      }
+  };
+
   const logoutUser = () => {
       dispatch({ type: 'LOGOUT' });
       addToast('Securely logged out', 'success');
   };
 
   return (
-    <AppContext.Provider value={{ state, dispatch, addToast, loginUser, logoutUser }}>
+    <AppContext.Provider value={{ state, dispatch, addToast, loginUser, registerUser, logoutUser }}>
       <div className="toast-container" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {toasts.map(t => (
           <div key={t.id} style={{ 

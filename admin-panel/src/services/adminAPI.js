@@ -27,31 +27,20 @@ export const AdminAPI = {
     },
     users: {
         getAll: async () => {
-            // Mocking the get users endpoint for the admin view
-            // In a real environment: await adminAxios.get('/admin/users');
-            return [
-                { id: '1', name: 'Rohan Fitness', email: 'rohan@example.com', role: 'creator', status: 'verified', joined: '2026-01-15' },
-                { id: '2', name: 'MuscleMax', email: 'muscle@max.com', role: 'brand', status: 'active', joined: '2026-02-10' },
-                { id: '3', name: 'TechScammer', email: 'spam@bot.com', role: 'creator', status: 'banned', joined: '2026-04-10' }
-            ];
+            const res = await adminAxios.get('/admin/users');
+            return res.data;
         }
     },
     campaigns: {
         getAll: async () => {
-            return [
-                { id: 'c1', title: 'Summer Shred Reel', brand: 'MuscleMax', budget: 15000, status: 'approved' },
-                { id: 'c2', title: 'Fake Giveaways', brand: 'Unknown', budget: 500000, status: 'pending_review' }
-            ];
+            const res = await adminAxios.get('/campaigns');
+            return res.data;
         }
     },
     dashboard: {
         getMetrics: async () => {
-            return {
-                totalUsers: 1450,
-                activeCampaigns: 89,
-                totalRevenue: 2450000,
-                spamDetected: 12
-            };
+            const res = await adminAxios.get('/admin/metrics');
+            return res.data;
         }
     }
 };

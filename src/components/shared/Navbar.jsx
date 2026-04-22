@@ -1,25 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import { Button } from '../ui/Button';
-import { API } from '../../services/api';
+import AuthModal from '../auth/AuthModal';
 
 export const Navbar = () => {
-  const { state, loginUser, logoutUser } = useApp();
+  const { state, logoutUser } = useApp();
   const navigate = useNavigate();
-
-  const handleLogin = async (type) => {
-    try {
-        const email = type === 'creator' ? 'rohan@example.com' : 'muscle@max.com';
-        await loginUser(email, 'password123'); // Password hardcoded for 1-click test flow
-        navigate('/dashboard');
-    } catch (error) {
-        // Error toast handled centrally in Context
-    }
-  };
+  const [showAuth, setShowAuth] = useState(false);
 
   return (
-    <nav className="glass" style={{ position: 'sticky', top: 0, zIndex: 50, padding: '1rem 0' }}>
+    <>
+    <nav style={{ padding: '1.25rem 0', background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(20px)', position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
       <div className="container flex-between">
         <h1 
             className="btn-interaction" 
@@ -39,10 +31,9 @@ export const Navbar = () => {
         </div>
         
         {!state.isAuthenticated ? (
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <Button variant="ghost" onClick={() => handleLogin('brand')}>Brand Login</Button>
-            <Button variant="secondary" onClick={() => handleLogin('creator')}>Creator Login</Button>
-            <Button onClick={() => navigate('/apply')}>Join Network</Button>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <Button variant="ghost" onClick={() => setShowAuth(true)}>Log in</Button>
+            <Button onClick={() => setShowAuth(true)}>Sign Up</Button>
           </div>
         ) : (
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
@@ -60,5 +51,7 @@ export const Navbar = () => {
         )}
       </div>
     </nav>
+    {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+    </>
   );
 };

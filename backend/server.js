@@ -8,13 +8,14 @@ import authRoutes from './routes/authRoutes.js';
 import creatorRoutes from './routes/creatorRoutes.js';
 import { campaignRouter } from './routes/campaignRoutes.js';
 import { messageRouter } from './routes/messageRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config();
 
 const app = express();
 
 // Secure Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
+app.use(cors());
 app.use(express.json());
 
 // Database Connection
@@ -26,6 +27,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Route Mounts
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/api/creators', creatorRoutes);
 app.use('/api/campaigns', campaignRouter);
 app.use('/api/messages', messageRouter);
