@@ -30,6 +30,7 @@ app.use('/api/creators', creatorRoutes);
 app.use('/api/campaigns', campaignRouter);
 app.use('/api/messages', messageRouter);
 
+app.get('/', (req, res) => res.send('CreatorBharat Production API is globally active and listening.'));
 app.get('/health', (req, res) => res.status(200).json({ status: 'live', service: 'CreatorBharat Core API' }));
 
 const PORT = process.env.PORT || 5000;
